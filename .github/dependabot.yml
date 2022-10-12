@@ -1,0 +1,8 @@
+version: 2
+updates:
+# https://github.com/dependabot/dependabot-core/issues/2178
+# Maintain dependencies for pip
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"

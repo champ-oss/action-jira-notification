@@ -1,2 +1,2 @@
 atlassian==0.0.0
-atlassian_python_api==3.34.0
+atlassian_python_api==3.40.0

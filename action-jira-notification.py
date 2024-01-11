@@ -53,7 +53,7 @@ def main():
     jiratoken = os.environ["JIRA_TOKEN"]
     jirahost = os.environ["JIRA_HOST"]
     jirauser = os.environ["JIRA_USER"]
-    jira_type = os.environ("JIRA_TYPE")
+    jira_type = os.environ["JIRA_TYPE"]
     github_wf_name = os.environ["GITHUB_WORKFLOW_NAME"]
     # adding suffix as some job types are key words in JQL and can't be used in query
     github_wf_name_suffix = github_wf_name + "-job_type"

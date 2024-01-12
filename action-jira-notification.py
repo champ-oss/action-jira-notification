@@ -28,7 +28,7 @@ def check_existing_issue(jira: str, project: str, repo: str, workflow_name: str)
     return get_total_issue_count
 
 
-def create_jira_issue(jira: str, project: str, repo: str, workflow_name: str) -> None:
+def create_jira_issue(jira: str, project: str, repo: str, workflow_name: str, jira_type: str) -> None:
     jira.issue_create(
         fields={
             "project": {
@@ -39,7 +39,7 @@ def create_jira_issue(jira: str, project: str, repo: str, workflow_name: str) ->
                 workflow_name
             ],
             "issuetype": {
-                "name": "Problem"
+                "name": jira_type
             },
             "summary": "" + repo + " failure",
             "description": "" + repo + " - " + workflow_name + " failure",
@@ -53,6 +53,7 @@ def main():
     jiratoken = os.environ["JIRA_TOKEN"]
     jirahost = os.environ["JIRA_HOST"]
     jirauser = os.environ["JIRA_USER"]
+    jira_type = os.environ["JIRA_TYPE"]
     github_wf_name = os.environ["GITHUB_WORKFLOW_NAME"]
     # adding suffix as some job types are key words in JQL and can't be used in query
     github_wf_name_suffix = github_wf_name + "-job_type"
@@ -62,7 +63,7 @@ def main():
     # checking if issue exist, creating issue if total count equals zero
     get_issue_count = check_existing_issue(get_jira_auth, jiraproject, repo, github_wf_name_suffix)
     if get_issue_count == 0:
-        create_jira_issue(get_jira_auth, jiraproject, repo, github_wf_name_suffix)
+        create_jira_issue(get_jira_auth, jiraproject, repo, github_wf_name_suffix, jira_type)
     else:
         print('not creating issue, already exist........')
 

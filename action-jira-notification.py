@@ -36,7 +36,7 @@ def get_description(repo: str, workflow_name: str) -> str:
     github_run_id = os.environ.get('GITHUB_RUN_ID')
     return (
         repo + ' - ' + workflow_name + ' failure\n'
-        + f'workflow failure URL: ${github_server_url}/${github_repo}/actions/runs/${github_run_id}\n'
+        + f'workflow failure URL: ${{github_server_url}}/${{github_repo}}/actions/runs/${{github_run_id}}\n'
     )
 
 

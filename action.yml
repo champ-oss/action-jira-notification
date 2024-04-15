@@ -1,14 +1,6 @@
 name: update
 description: https://github.com/champ-oss/action-jira-notication
 inputs:
-  GIT_REPO:
-    description: 'tagging repo for failure'
-    required: true
-    default: 'TEST'
-  GITHUB_WORKFLOW_NAME:
-    description: 'workflow causing failure'
-    required: true
-    default: 'testing'
   JIRA_PROJECT:
     description: 'jira project to open ticket'
     required: true
@@ -36,11 +28,9 @@ runs:
       shell: bash
       env:
         JIRA_PROJECT: ${{ inputs.JIRA_PROJECT }}
-        GIT_REPO: ${{ inputs.GIT_REPO }}
         JIRA_TOKEN: ${{ inputs.JIRA_TOKEN }}
         JIRA_USER: ${{ inputs.JIRA_USER }}
         JIRA_HOST: ${{ inputs.JIRA_HOST }}
         JIRA_TYPE: ${{ inputs.JIRA_TYPE }}
-        GITHUB_WORKFLOW_NAME: ${{ inputs.GITHUB_WORKFLOW_NAME }}
       run: |
         python ${GITHUB_ACTION_PATH}/action-jira-notification.py

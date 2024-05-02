@@ -52,7 +52,7 @@ def create_jira_issue(jira: str, project: str, repo: str, workflow_name: str, ji
 
 
 def close_jira_issue(jira: str, issue_id: str) -> any:
-    jira.issue_transition(issue_id, 'Done', comment='Closing issue as workflow was successful')
+    jira.issue_transition(issue_id, 'Done')
 
 
 def main():

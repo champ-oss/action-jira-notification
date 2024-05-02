@@ -52,7 +52,7 @@ def create_jira_issue(jira: str, project: str, repo: str, workflow_name: str, ji
 
 
 def close_jira_issue(jira: str, issue_id: str) -> any:
-    jira.issue_transition(issue_id, 'Done')
+    jira.issue_transition(issue_id, 'Done', comment='Closing issue as workflow was successful')
 
 
 def main():
@@ -68,12 +68,14 @@ def main():
     get_jira_auth = jira_auth(jira_host, jira_user, jira_token)
     get_issue_count, get_jira = check_existing_issue(get_jira_auth, jira_project, repo, github_wf_name_suffix)
     if get_issue_count == 0 and os.environ.get('GITHUB_JOB_STATUS') == 'failure':
+        print('creating issue on jira as workflow failed')
         create_jira_issue(get_jira_auth, jira_project, repo, github_wf_name_suffix, jira_type)
     elif get_issue_count > 0 and os.environ.get('GITHUB_JOB_STATUS') == 'success':
         for issue in get_jira:
+            print('closing existing issues on jira as workflow was successful')
             close_jira_issue(get_jira_auth, issue['key'])
     else:
-        print('not creating issue, already exist........')
+        print('not creating issue or closing issue')
 
 
 main()

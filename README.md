@@ -18,18 +18,18 @@ Summary: jira action to create jira problem ticket on job failure.
 
 ## Technologies Used
 - python script
-- github actions
+- GitHub actions
 
 ## Features
 
 * using jira jql query api, check if problem ticket already exist
-* create problem ticket
+* create problem ticket on failure
+* close existing tickets on success
 
 ## Assumptions
 
 * jira project has labels enabled on workflow.  This is used to tag and query
-* jira project has To Do and In Progress swim lanes
-* jira project has Problem ticket issue type 
+* jira project has Done or Resolved status options.
 
 ## Usage
 

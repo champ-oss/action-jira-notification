@@ -37,4 +37,4 @@ runs:
         JIRA_TYPE: ${{ inputs.JIRA_TYPE }}
         GITHUB_JOB_STATUS: ${{ inputs.GITHUB_JOB_STATUS }}
       run: |
-        python ${GITHUB_ACTION_PATH}/action-jira-notification.py
+        python ${GITHUB_ACTION_PATH}/action_jira_notification.py

@@ -16,4 +16,4 @@ lint:
 	flake8 --exclude=venv/,terraform/ --max-line-length=130 .
 
 test:
-	python3 -m pytest -rP utils/*.py
+	python3 -m pytest -rP test/*.py

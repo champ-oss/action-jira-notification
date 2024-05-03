@@ -29,8 +29,8 @@ jobs:
           JIRA_HOST: ${{ secrets.JIRA_HOST }}
           JIRA_PROJECT: TEST
           JIRA_USER: ${{ secrets.JIRA_USER }}
-          GITHUB_WORKFLOW_NAME: ${{ env.GITHUB_WORKFLOW_NAME }}
           JIRA_TYPE: Problem
+          GITHUB_JOB_STATUS: ${{ env.GITHUB_JOB_STATUS }}
   test-job:
     runs-on: ubuntu-latest
     steps:

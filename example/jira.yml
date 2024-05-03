@@ -10,20 +10,30 @@ env:
 
 jobs:
   jira:
-    needs: [ testjob ]
-    if: failure() and github.ref == 'refs/heads/main'
+    needs: [ test-job ]
+    if: failure() || success()
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - name: set env var
+        run: |
+          if [[ ${{ needs.test-job.result }} == success ]]; then
+             echo "GITHUB_JOB_STATUS=success" >> $GITHUB_ENV
+          elif [[ ${{ needs.test-job.result }} == failure ]]; then
+             echo "GITHUB_JOB_STATUS=failure" >> $GITHUB_ENV
+          else
+             echo "jira process not needed"
+          fi
       - name: jira-notification-action
-        uses: champ-oss/action-jira-notification@v1.0.0
+        uses: champ-oss/action-jira-notification@main
         with:
           JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
           JIRA_HOST: ${{ secrets.JIRA_HOST }}
           JIRA_PROJECT: TEST
           JIRA_USER: ${{ secrets.JIRA_USER }}
-          GITHUB_WORKFLOW_NAME: ${{ env.GITHUB_WORKFLOW_NAME }}
           JIRA_TYPE: Problem
-  testjob:
+          GITHUB_JOB_STATUS: ${{ env.GITHUB_JOB_STATUS }}
+  test-job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

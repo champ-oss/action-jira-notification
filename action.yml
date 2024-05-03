@@ -18,6 +18,9 @@ inputs:
     description: 'jira type'
     required: true
     default: 'Incident'
+  GITHUB_JOB_STATUS:
+    description: 'github job status'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -32,5 +35,6 @@ runs:
         JIRA_USER: ${{ inputs.JIRA_USER }}
         JIRA_HOST: ${{ inputs.JIRA_HOST }}
         JIRA_TYPE: ${{ inputs.JIRA_TYPE }}
+        GITHUB_JOB_STATUS: ${{ inputs.GITHUB_JOB_STATUS }}
       run: |
-        python ${GITHUB_ACTION_PATH}/action-jira-notification.py
+        python ${GITHUB_ACTION_PATH}/action_jira_notification.py

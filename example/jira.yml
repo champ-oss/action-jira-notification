@@ -19,8 +19,10 @@ jobs:
         run: |
           if [[ ${{ needs.test-job.result }} == success ]]; then
              echo "GITHUB_JOB_STATUS=success" >> $GITHUB_ENV
-          else
+          elif [[ ${{ needs.test-job.result }} == failure ]]; then
              echo "GITHUB_JOB_STATUS=failure" >> $GITHUB_ENV
+          else
+             echo "jira process not needed"
           fi
       - name: jira-notification-action
         uses: champ-oss/action-jira-notification@main

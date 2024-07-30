@@ -98,8 +98,9 @@ def main() -> None:
     jira_host = os.environ.get('JIRA_HOST')
     jira_user = os.environ.get('JIRA_USER')
     jira_type = os.environ.get('JIRA_TYPE', 'Incident')
-    github_wf_name = os.environ.get('GITHUB_WORKFLOW')
-    github_wf_name_suffix = github_wf_name + '-job_type'
+    github_wf_name = (os.environ.get('CUSTOM_WORKFLOW_NAME') + '-job-type', os.environ.get('GITHUB_WORKFLOW') + '-job'
+                                                                                                                '-type')
+    github_wf_name_suffix = github_wf_name if github_wf_name[0] is not None else github_wf_name[1]
 
     get_jira_auth = jira_auth(jira_host, jira_user, jira_token)
     get_issue_count, get_jira = check_existing_issue(get_jira_auth, jira_project, repo, github_wf_name_suffix)

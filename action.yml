@@ -21,6 +21,9 @@ inputs:
   GITHUB_JOB_STATUS:
     description: 'github job status'
     required: true
+  CUSTOM_WORKFLOW_NAME:
+    description: 'custom workflow name'
+    required: false
 runs:
   using: "composite"
   steps:
@@ -36,5 +39,6 @@ runs:
         JIRA_HOST: ${{ inputs.JIRA_HOST }}
         JIRA_TYPE: ${{ inputs.JIRA_TYPE }}
         GITHUB_JOB_STATUS: ${{ inputs.GITHUB_JOB_STATUS }}
+        CUSTOM_WORKFLOW_NAME: ${{ inputs.CUSTOM_WORKFLOW_NAME }}
       run: |
         python ${GITHUB_ACTION_PATH}/action_jira_notification.py

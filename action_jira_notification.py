@@ -83,7 +83,7 @@ def close_jira_issue(jira: str, issue_id: str) -> any:
         jira: Jira object.
         issue_id: Jira issue id.
     """
-    jira.issue_transition(issue_id, 'Resolved')
+    jira.issue_transition(issue_id, 'Done')
 
 
 def main() -> None:
